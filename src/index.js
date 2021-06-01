@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./styles.css";
 import * as Yup from 'yup';
 
 
 const SignupForm = () => {
- 
-    return (
-      <Formik
+  return (
+    <Formik
       initialValues={{ firstName: '', lastName: '', email: '' }}
       validationSchema={Yup.object({
         firstName: Yup.string()
@@ -26,38 +25,22 @@ const SignupForm = () => {
         }, 400);
       }}
     >
-    {formik => (
-      <form onSubmit={formik.handleSubmit}>
+      <Form>
         <label htmlFor="firstName">First Name</label>
-        <input
-          id="firstName"
-          type="text"
-          {...formik.getFieldProps('firstName')}
-        />
-        {formik.touched.firstName && formik.errors.firstName ? (
-          <div>{formik.errors.firstName}</div>
-        ) : null}
+        <Field name="firstName" type="text" />
+        <ErrorMessage name="firstName" />
 
         <label htmlFor="lastName">Last Name</label>
-        <input
-          id="lastName"
-          type="text"
-          {...formik.getFieldProps('lastName')}
-        />
-        {formik.touched.lastName && formik.errors.lastName ? (
-          <div>{formik.errors.lastName}</div>
-        ) : null}
+        <Field name="lastName" type="text" />
+        <ErrorMessage name="lastName" />
 
         <label htmlFor="email">Email Address</label>
-        <input id="email" type="email" {...formik.getFieldProps('email')} />
-        {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div>
-        ) : null}
+        <Field name="email" type="email" />
+        <ErrorMessage name="email" />
 
         <button type="submit">Submit</button>
-      </form>
-    )}
-  </Formik>
+      </Form>
+    </Formik>
   );
 };
 
